@@ -7,6 +7,8 @@
 
     <!-- dependencies -->
     <script src="bower_components/jquery/dist/jquery.js"></script>
+    <script src="bower_components/underscore/underscore.js"></script>
+
     <script>
       // YOU DO NOT NEED TO EDIT THIS CODE
       if (!/(&|\?)username=/.test(window.location.search)) {
@@ -26,10 +28,13 @@
     <div id="main">
       <h1>chatterbox</h1>
       <!-- Your HTML goes here! -->
-      <form>
+        <button id ="dropdown" onclick = "app.showRoom()">Rooms</button>
+        <div id ="rooms" hidden="hidden"></div>
+
+        username<input id = "user" name="username" type="text">
         Your text here<input id="message" type="text" name="message">
-        <input type='submit' id="send" class='submit'>
-      </form>
+        <input type='submit' id="send" class='submit' onclick="app.handleSubmit()">
+
     </div>
     <div id="chats"></div>
   </body>
