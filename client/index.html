@@ -30,11 +30,15 @@
       <!-- Your HTML goes here! -->
         <button id ="dropdown" onclick = "app.showRoom()">Rooms</button>
         <div id ="rooms" hidden="hidden"></div>
+      </br>
 
         username<input id = "user" name="username" type="text">
         Your text here<input id="message" type="text" name="message">
         <input type='submit' id="send" class='submit' onclick="app.handleSubmit()">
-
+      <button class='refresh' onclick="app.renderRoom()">Refresh Messages</button>
+    </br>
+    <!-- <button id ="friendslist" onclick ="app.showFriends()">Show Your Friends</button> -->
+    <div id="friends"></div>
     </div>
     <div id="chats"></div>
   </body>
