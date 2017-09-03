@@ -11,6 +11,10 @@ class App {
     // $('#send .submit').submit(() => {
     //   this.handleSubmit();
     // });
+    app.fetch();
+    setInterval(() => {
+      app.fetch();
+    }, 10000);
   }
   send(message) {
     $.ajax({
@@ -36,7 +40,7 @@ class App {
       'type': 'GET',
       'data': {
         'order':'-createdAt',
-        'limit': '100',
+        'limit': '40',
       },
       'success': (data) => {
         //store the data somewhere
@@ -68,11 +72,13 @@ class App {
       // var msg = message.text;
       var msg = (!!message.text)? message.text.replace('<script', 'I thought I\'d be clever...') : '';
       var user = message.username || 'anonymous';
-      var container = $('<div>').addClass(user.split(' ')[0]);
-      var displayMessage = $('<span>' + msg + '</span>').addClass(user.split(' ')[0]);
-      var userButton = $('<button>' + user + '</button>').addClass('username').click(() => {
+      var container = $('<div>').addClass(user.split(' ')[0]).addClass('container');
+      var displayMessage = $('<span>' + msg + '</span>').addClass(user.split(' ')[0]).addClass('messageText');
+      var userSpan = $('<span>' + user + '</span>').addClass('usernameText');
+      var userButton = $('<button></button>').addClass('username').click(() => {
         this.handleUsernameClick(user);
       });
+      userButton.append(userSpan);
       //userButton.append(displayMessage);
       // displayMessage.append(userButton);
       container.append(userButton);
@@ -98,14 +104,17 @@ class App {
       $('#rooms').toggle();
     });
     this.availRoom.forEach((room) => {
-      $('#rooms').append('<button class = "roomAvail" id = "'+ room + '">'
-        + room + '</button>');
-      $('#' + room).click(function() {
-        //console.log($(this));
-        thisApp.selectedRoom = $(this).attr('id');
-        thisApp.renderRoom(thisApp.allMessages);
-        //thisApp.renderRoom(thisApp.allMessages, $(this).attr('id'));
-      });
+      if (room!=='main') {
+        //var thisRoom = room.replace('<script', '');
+        $('#rooms').append('<button class = "roomAvail" id = "'+ room + '">'
+          + room + '</button>');
+        $('#' + room).click(function() {
+          //console.log($(this));
+          thisApp.selectedRoom = $(this).attr('id');
+          thisApp.renderRoom(thisApp.allMessages);
+          //thisApp.renderRoom(thisApp.allMessages, $(this).attr('id'));
+        });
+      }
     });
     // $('.roomAvail').click(() => {
     //   console.log($(this));
@@ -115,7 +124,7 @@ class App {
   }
   showFriends() {
     var friendsFriends = this.friendsList;
-    $('#friends').html('');
+    $('#friends').html('Current Friends:');
 
     //put every single one of our friends in our friends list into #friends
     for (var i in friendsFriends) {
@@ -127,7 +136,7 @@ class App {
   }
   renderRoom(data) {
     var data = data || this.allMessages;
-    var messagestoShow = data.results;
+    var messagestoShow = (data)? data.results : [];
     //console.log(roomName);
     $('#chats').html('');
     $('#roomSelect').append('<div>' + this.selectedRoom + '</div>');
@@ -155,11 +164,12 @@ class App {
     } else {
       $user.addClass('friend');
     }
+    var safeUser = user.replace('"', '');
     //when we click, we want to push the username into friendsList
-    if(!!this.friendsList[user]) {
-      delete this.friendsList[user];
+    if(!!this.friendsList[safeUser]) {
+      delete this.friendsList[safeUser];
     } else {
-      this.friendsList[user] = user;
+      this.friendsList[safeUser] = safeUser;
     }
 
     this.showFriends();
@@ -202,7 +212,7 @@ $(document).ready(() => {
   $('#send .submit').submit(() => {
     app.handleSubmit();
   });
-  app.fetch();
+
   var message = {
     'username': '',
     'text':  '<script>$("body").css("color", "pink")</script>',

@@ -1,5 +1,5 @@
 body {
-    background: #eee;
+    background: #d7e6e8;
     text-align: center;
     padding: 0 25px;
     font-family: arial, sans-serif;
@@ -9,7 +9,7 @@ body {
     width: 500px;
     margin: auto;
     text-align: left;
-    background: white;
+    background: #f9f9f4;
     padding: 50px 60px;
     border: solid #ddd;
     border-width: 0 1px 1px 1px;
@@ -20,6 +20,8 @@ body {
     font-size: 35px;
     margin-bottom: 5px;
     padding: 5px;
+    font-family: 'Montserrat', sans-serif;
+    text-align: center;
 }
 
 #main h1 span {
@@ -84,7 +86,61 @@ form input[type=text] {
 }
 
 .friend {
-    color: #fff;
-    background-color: #0090da;
-    font-weight: 'bold';
+    /*color: #fff;*/
+    /*background-color: #0090da;*/
+    font-weight: bold;
+}
+
+button.username {
+  float: left;
+  padding-top: 7px;
+  font-family: 'Josefin Slab', serif;
+  font-size: 20px;
+  font-variant: small-caps;
+  width: 120px;
+  /*white-space: nowrap;*/
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+span.messageText {
+  margin-left: 12px;
+  font-family: 'Oswald', sans-serif;
+}
+
+.container {
+  height: 32px;
+  padding-top: 4px
+}
+
+.inputbar {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  font-family: 'Faustina', serif;
+}
+
+input {
+  padding-left: 3px;
+  padding-right: 9px;
+}
+
+.inputbarSpan {
+  padding-right: 6px;
+}
+
+button.refresh {
+  float: right;
+}
+
+#friends {
+  font-family: 'Josefin Slab', serif;
+}
+
+span.friendsHeader {
+  font-style: italic;
+}
+
+span.usernameText {
+  width: 100px;
+
 }

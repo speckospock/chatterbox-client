@@ -3,6 +3,7 @@
   <head>
     <meta charset="utf-8">
     <title>chatterbox</title>
+    <link href="https://fonts.googleapis.com/css?family=Faustina|Josefin+Slab|Montserrat|Oswald" rel="stylesheet">
     <link rel="stylesheet" href="styles/styles.css">
 
     <!-- dependencies -->
@@ -31,14 +32,17 @@
         <button id ="dropdown" onclick = "app.showRoom()">Rooms</button>
         <div id ="rooms" hidden="hidden"></div>
       </br>
-
-        username<input id = "user" name="username" type="text">
-        Your text here<input id="message" type="text" name="message">
+      <div class="inputbar">
+        <span class = 'inputbarSpan'>Username</span>
+        <input id = "user" name="username" type="text">
+        <span class = 'inputbarSpan'>Message</span>
+        <input id="message" type="text" name="message">
         <input type='submit' id="send" class='submit' onclick="app.handleSubmit()">
-      <button class='refresh' onclick="app.renderRoom()">Refresh Messages</button>
+      </div>
     </br>
     <!-- <button id ="friendslist" onclick ="app.showFriends()">Show Your Friends</button> -->
-    <div id="friends"></div>
+    <div id="friends"><span class="friendsHeader">Current Friends:<span></div>
+    <button class='refresh' onclick="app.renderRoom()">Refresh Messages</button>
     </div>
     <div id="chats"></div>
   </body>
